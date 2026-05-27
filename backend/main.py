@@ -19,8 +19,13 @@ from routers.user_router import router as user_router
 # Paths
 # ---------------------------------------------------------------------------
 
-UPLOADS_DIR = Path("uploads")
-FRONTEND_DIR = Path(r"g:\code\blog\frontend")
+if os.getenv("VERCEL"):
+    UPLOADS_DIR = Path("/tmp/uploads")
+else:
+    UPLOADS_DIR = Path("uploads")
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+FRONTEND_DIR = BASE_DIR / "frontend"
 
 # ---------------------------------------------------------------------------
 # Lifespan (startup / shutdown)

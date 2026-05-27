@@ -14,7 +14,12 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Default to SQLite for easy setup — swap to PostgreSQL by setting env var:
 #   DATABASE_URL=postgresql://postgres:postgres@localhost:5432/blogdb
-_DB_PATH = Path(__file__).resolve().parent / "blogverse.db"
+if os.getenv("VERCEL"):
+    # On Vercel, the only writable folder is /tmp
+    _DB_PATH = Path("/tmp/blogverse.db")
+else:
+    _DB_PATH = Path(__file__).resolve().parent / "blogverse.db"
+
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{_DB_PATH}")
 
 connect_args = {}
