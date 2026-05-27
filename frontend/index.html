@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BlogVerse - Chia sẻ bài viết và ý tưởng của bạn với cộng đồng">
+  <meta name="theme-color" content="#6c5ce7">
+  <title>BlogVerse — Share Your Stories</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo" role="banner" aria-label="BlogVerse Home">BlogVerse</div>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+          <span class="icon">🌙</span>
+        </button>
+
+        <button class="btn-login" id="btn-login">Sign In</button>
+
+        <div class="user-profile hidden" id="user-profile">
+          <img class="user-avatar" src="" alt="Avatar">
+          <span class="user-name">User</span>
+          <span class="dropdown-arrow">▼</span>
+
+          <div class="user-dropdown" id="user-dropdown">
+            <button class="dropdown-item" id="dropdown-edit-profile">
+              <span class="dropdown-icon">✏️</span>
+              Edit Profile
+            </button>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item" id="dropdown-logout">
+              <span class="dropdown-icon">🚪</span>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1 class="hero-title">
+      Share Your <span class="gradient-text">Stories</span> With The World
+    </h1>
+    <p class="hero-subtitle">
+      A beautiful platform to express your ideas, connect with readers, and build your writing community.
+    </p>
+    <button class="hero-cta" id="hero-cta">
+      <span class="cta-icon">✨</span>
+      <span id="hero-cta-text">Join Us</span>
+    </button>
+  </section>
+
+  <main class="posts-section">
+    <div class="section-header">
+      <h2 class="section-title">Latest Posts</h2>
+    </div>
+    <div class="posts-grid" id="posts-container">
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">© 2026 <span class="footer-brand">BlogVerse</span>. All rights reserved.</p>
+  </footer>
+
+  <button class="fab hidden" id="fab-add-post" aria-label="Create new post" title="Create new post">
+    ＋
+  </button>
+
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">Welcome Back 👋</h2>
+      <p class="modal-subtitle">Sign in to continue to BlogVerse</p>
+
+      <form id="login-form" autocomplete="on">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Email</label>
+          <input class="form-input" type="email" id="login-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="login-password">Password</label>
+          <input class="form-input" type="password" id="login-password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+        </div>
+        <div class="form-group" style="text-align: right;">
+          <button type="button" class="form-link" id="switch-to-reset">Forgot Password?</button>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+      </form>
+
+      <div class="form-footer">
+        Don't have an account? <button type="button" class="form-link" id="switch-to-register">Create one</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="register-modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">Create Account ✨</h2>
+      <p class="modal-subtitle">Join BlogVerse and start sharing</p>
+
+      <form id="register-form" autocomplete="on">
+        <div class="avatar-upload">
+          <div class="avatar-upload-area" id="register-avatar-area" title="Click to upload avatar">
+            <span class="upload-icon">📷</span>
+          </div>
+          <span class="upload-label">Upload Avatar (optional)</span>
+          <input class="file-input-hidden" type="file" id="register-avatar-input" name="avatar" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="register-nickname">Nickname</label>
+          <input class="form-input" type="text" id="register-nickname" name="nickname" placeholder="Your display name" required autocomplete="nickname">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-email">Email</label>
+          <input class="form-input" type="email" id="register-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-password">Password</label>
+          <input class="form-input" type="password" id="register-password" name="password" placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="register-confirm">Confirm Password</label>
+          <input class="form-input" type="password" id="register-confirm" name="confirm_password" placeholder="Re-enter your password" required autocomplete="new-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+      </form>
+
+      <div class="form-footer">
+        Already have an account? <button type="button" class="form-link" id="switch-to-login">Sign in</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="reset-modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">Reset Password 🔐</h2>
+      <p class="modal-subtitle">Enter your email and a new password</p>
+
+      <form id="reset-form">
+        <div class="form-group">
+          <label class="form-label" for="reset-email">Email</label>
+          <input class="form-input" type="email" id="reset-email" name="email" placeholder="you@example.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reset-password">New Password</label>
+          <input class="form-input" type="password" id="reset-password" name="new_password" placeholder="At least 6 characters" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="reset-confirm">Confirm New Password</label>
+          <input class="form-input" type="password" id="reset-confirm" name="confirm_password" placeholder="Re-enter new password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Reset Password</button>
+      </form>
+
+      <div class="form-footer">
+        Remember your password? <button type="button" class="form-link" id="switch-reset-to-login">Sign in</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="add-post-modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">New Post ✍️</h2>
+      <p class="modal-subtitle">Share something amazing with the community</p>
+
+      <form id="add-post-form">
+        <div class="form-group">
+          <label class="form-label" for="add-post-title">Title</label>
+          <input class="form-input" type="text" id="add-post-title" name="title" placeholder="An amazing title..." required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="add-post-content">Content</label>
+          <textarea class="form-input" id="add-post-content" name="content" placeholder="Write your story here..." rows="10" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          ✨ Publish Post
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="edit-post-modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">Edit Post ✏️</h2>
+      <p class="modal-subtitle">Update your post content</p>
+
+      <form id="edit-post-form">
+        <div class="form-group">
+          <label class="form-label" for="edit-post-title">Title</label>
+          <input class="form-input" type="text" id="edit-post-title" name="title" placeholder="Post title" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="edit-post-content">Content</label>
+          <textarea class="form-input" id="edit-post-content" name="content" placeholder="Post content..." rows="10" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          💾 Save Changes
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="post-detail-modal">
+    <div class="modal-content modal-lg">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <div id="post-detail-content">
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="edit-profile-modal">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2 class="modal-title">Edit Profile 👤</h2>
+      <p class="modal-subtitle">Update your personal information</p>
+      <form id="edit-profile-form">
+        <div class="avatar-upload">
+          <div class="avatar-upload-area" id="profile-avatar-area" title="Click to change avatar">
+            <span class="upload-icon">📷</span>
+          </div>
+          <span class="upload-label">Click to change avatar</span>
+          <input class="file-input-hidden" type="file" id="profile-avatar-input" name="avatar" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profile-nickname">Nickname</label>
+          <input class="form-input" type="text" id="profile-nickname" name="nickname" placeholder="Your display name" required>
+        </div>
+        <div class="form-divider">Change Password (optional)</div>
+        <div class="form-group">
+          <label class="form-label" for="profile-password">New Password</label>
+          <input class="form-input" type="password" id="profile-password" name="password" placeholder="Leave blank to keep current">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="profile-confirm">Confirm New Password</label>
+          <input class="form-input" type="password" id="profile-confirm" name="confirm_password" placeholder="Re-enter new password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          💾 Save Profile
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="success-popup-overlay" id="success-popup">
+    <div class="success-popup">
+      <div class="success-checkmark">
+        <span class="check-icon">✓</span>
+      </div>
+      <p class="popup-message" id="success-popup-message">Success!</p>
+      <button class="btn btn-primary" id="success-popup-ok">OK</button>
+    </div>
+  </div>
+
+  <div class="confirm-overlay" id="confirm-dialog">
+    <div class="confirm-dialog">
+      <span class="confirm-icon">⚠️</span>
+      <p class="confirm-message" id="confirm-dialog-message">Are you sure?</p>
+      <div class="confirm-actions">
+        <button class="btn btn-secondary" id="confirm-dialog-cancel">Cancel</button>
+        <button class="btn btn-danger" id="confirm-dialog-yes">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="/static/js/theme.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/blog.js"></script>
+  <script src="/static/js/app.js"></script>
+
+</body>
+</html>
